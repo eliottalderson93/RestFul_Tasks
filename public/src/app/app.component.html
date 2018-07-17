@@ -1,7 +1,17 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<h1>Hello</h1>
-<p>{{ data }}</p>
-<button class = "button" (click) = "findPoke()">Steelix!</button>
+<p style = "display:none;">{{pokemon}}</p>
+<p>{{ pokemon.name }}</p>
+<p>{{ pokemon.order }}</p>
+<ul *ngFor = "let x of pokemon.abilities">
+    <li>{{x.ability.name}}</li>
+</ul>
+<ul *ngFor = "let n of pokemon.types">
+    <li>
+        {{ n.type.name }}
+    </li>
+</ul>
+<img src = "{{ pokemon.sprites.front_shiny }}" >
+<img src = "{{ pokemon.sprites.front_default }}" >
+<!-- pokemon.types[n].type.name -->
 <!-- <button class = "button" (click)="findTask('5b4c239c613eb80500b9acc8')">1</button>
 <button class = "button" (click)="findTask('5b4c24da613eb80500b9acca')">1</button>
 <button class = "button" (click)="findTask('5b4c256d446f511a64e790e3')">1</button>

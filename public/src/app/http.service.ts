@@ -12,7 +12,8 @@ export class HttpService {
     //console.log("tasks");
     let tempObservable = this._http.get('/tasks');
     // subscribe to the Observable and provide the code we would like to do with our data from the response
-    tempObservable.subscribe(data => console.log("Got our tasks!", data));
+    //tempObservable.subscribe(data => console.log("Got our tasks!", data));
+    return tempObservable; //not so temp
  }
  getTaskById(idToDelete : String){
   let route = '/tasks/' + idToDelete;
@@ -22,7 +23,8 @@ export class HttpService {
  getPokemon(){
   let route = 'https://pokeapi.co/api/v2/pokemon/208/';
   let tempObservable = this._http.get(route);
-  tempObservable.subscribe(data => console.log("Got one pokemon: ", data));
+  //tempObservable.subscribe(data => console.log("Got one pokemon: ", data));
+  return tempObservable;
  }
 
 }
