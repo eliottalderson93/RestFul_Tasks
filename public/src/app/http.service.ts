@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class HttpService {
-
   constructor(private _http: HttpClient) { 
     this.getTasks();
   }
@@ -19,6 +18,11 @@ export class HttpService {
   let route = '/tasks/' + idToDelete;
   let tempObservable = this._http.get(route);
   tempObservable.subscribe(data => console.log("Got one task: ", data));
+ }
+ getPokemon(){
+  let route = 'https://pokeapi.co/api/v2/pokemon/208/';
+  let tempObservable = this._http.get(route);
+  tempObservable.subscribe(data => console.log("Got one pokemon: ", data));
  }
 
 }

@@ -13,5 +13,7 @@ export class AppComponent {
   findTask(id : String){
     this._httpService.getTaskById(id);
   }
-  
+  findPoke(){
+    this._httpService.getPokemon();
+  }
 }
