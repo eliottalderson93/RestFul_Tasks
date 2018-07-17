@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 // Require path
 var path = require('path');
 // Setting our Static Folder Directory
-app.use(express.static(path.join(__dirname, './static')));
+app.use(express.static( __dirname + '/public/dist/public' ));
 // Setting our Views Folder Directory
 //DATABASE/MONGOOSE
 var mongoose = require('mongoose');
@@ -32,9 +32,9 @@ var Task = mongoose.model('Task');
 
 // Routes
 // Root Request
-app.get('/', (req, res) => {
-    res.redirect('/tasks');
-})
+// app.get('/', (req, res) => {
+//     //res.redirect('/tasks');
+// })
 
 app.get('/tasks',(req,res) => {
     Task.find({},function(err,tasks){
@@ -111,6 +111,6 @@ app.delete('/tasks/:taskId',(req,res) => {
 });
 
 // Setting our Server to Listen on Port: 8000
-app.listen(8000, function() {
-    console.log("listening on port 8000");
+app.listen(8500, function() {
+    console.log("listening on port 8500");
 })
