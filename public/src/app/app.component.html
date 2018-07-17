@@ -1,17 +1,46 @@
-<p style = "display:none;">{{pokemon}}</p>
-<p>{{ pokemon.name }}</p>
-<p>{{ pokemon.order }}</p>
-<ul *ngFor = "let x of pokemon.abilities">
-    <li>{{x.ability.name}}</li>
-</ul>
-<ul *ngFor = "let n of pokemon.types">
-    <li>
-        {{ n.type.name }}
-    </li>
-</ul>
-<img src = "{{ pokemon.sprites.front_shiny }}" >
-<img src = "{{ pokemon.sprites.front_default }}" >
+<section class="hero is-black">
+    <div class="hero-body">
+        <p class="title">RestFul Tasks</p>
+    </div>
+</section>
+<section class="container">
+    <p style="display:none;">{{pokemon}}</p>
+    <p>{{ pokemon.name }}</p>
+    <p>{{ pokemon.order }}</p>
+    <ul *ngFor="let x of pokemon.abilities">
+        <li>{{x.ability.name}}</li>
+    </ul>
+    <ul *ngFor="let n of pokemon.types">
+        <li>
+            {{ n.type.name }}
+        </li>
+    </ul>
+    <img src="{{ pokemon.sprites.front_shiny }}">
+    <img src="{{ pokemon.sprites.front_default }}">
+</section>
+<section class = "container">
+    <button class = "button" (click) = "getTasksFromService()">GET ALL TASKS</button>
+</section>
+<section class = "container" >
+    <div class = "columns" >
+        <div class = "column" *ngFor = "let task of tasks">
+                <p class = "title is-6">{{task.title}}</p>
+                <button class = "button" (click) = "showTaskDetails($event)" value = '{{task._id}}'>Details</button>
+        </div>
+    </div>
+    <div class = "container" *ngIf = "getTasks === true">
+        <p class = "title is-5">Details</p>
+        <p>{{details.description}}</p>
+        <p>{{details.completed}}</p>        
+    </div>
+</section>
+
+
 <!-- pokemon.types[n].type.name -->
+<!-- <button (click)="onButtonClick()" >Click me!</button>
+    <button (click)="onButtonClickParam(5)">Click me!</button>
+    <button (click)="onButtonClickParams(5, 'hello')">Click me!</button>
+    <button (click)="onButtonClickEvent($event)">Click me!</button>-->
 <!-- <button class = "button" (click)="findTask('5b4c239c613eb80500b9acc8')">1</button>
 <button class = "button" (click)="findTask('5b4c24da613eb80500b9acca')">1</button>
 <button class = "button" (click)="findTask('5b4c256d446f511a64e790e3')">1</button>
@@ -20,4 +49,3 @@
 <button value = "5b4c24da613eb80500b9acca">2</button>
 <button value = "5b4c256d446f511a64e790e3">3</button>
 <button value = "5b4c2585446f511a64e790e4">4</button> -->
-

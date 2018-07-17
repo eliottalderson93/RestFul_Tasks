@@ -18,7 +18,8 @@ export class HttpService {
  getTaskById(idToDelete : String){
   let route = '/tasks/' + idToDelete;
   let tempObservable = this._http.get(route);
-  tempObservable.subscribe(data => console.log("Got one task: ", data));
+  //tempObservable.subscribe(data => console.log("Got one task: ", data));
+  return tempObservable;
  }
  getPokemon(){
   let route = 'https://pokeapi.co/api/v2/pokemon/208/';
