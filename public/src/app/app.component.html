@@ -18,22 +18,35 @@
     <img src="{{ pokemon.sprites.front_shiny }}">
     <img src="{{ pokemon.sprites.front_default }}">
 </section>
-<section class = "container">
-    <button class = "button" (click) = "getTasksFromService()">GET ALL TASKS</button>
+<section class="container">
+    <button class="button" (click)="getTasksFromService()">GET ALL TASKS</button>
 </section>
-<section class = "container" >
-    <div class = "columns" >
-        <div class = "column" *ngFor = "let task of tasks">
-                <p class = "title is-6">{{task.title}}</p>
-                <button class = "button" (click) = "showTaskDetails($event)" value = '{{task._id}}'>Details</button>
+<section class="container">
+    <div class="columns">
+        <div class="column" *ngFor="let task of tasks">
+            <p class="title is-6">{{task.title}}</p>
+            <button class="button" (click)="showTaskDetails($event)" value='{{task._id}}'>Details</button>
+            <button class="button" (click)="delTask($event)" value='{{task._id}}'>Delete</button>
         </div>
     </div>
-    <div class = "container" *ngIf = "getTasks === true">
-        <p class = "title is-5">Details</p>
-        <p>{{details.description}}</p>
-        <p>{{details.completed}}</p>        
-    </div>
+    <form class="container" (submit) = "editTask()" *ngIf="details != null" >
+        <p class="title is-5">Details</p>
+        <input type = "text" name = "details.description" [(ngModel)]="details.description" />
+        <input type = "hidden" name = "details._id" [(ngModel)]="details._id"/>
+        <input type = "submit" value = "Edit Task"/>
+    </form>
 </section>
+<section class="container">
+    <p class = "title">Form</p>
+    <form (submit)="onSubmit()">
+        <!-- use the json pipe to see how newTask changes in real time -->
+        <p> {{ newTask | json }} </p>
+        <input type="text" name="newTask.title" [(ngModel)]="newTask.title" />
+        <input type="text" name="newTask.description" [(ngModel)]="newTask.description" />
+        <input type="submit" value="Create Task" />
+    </form>
+</section>
+
 
 
 <!-- pokemon.types[n].type.name -->

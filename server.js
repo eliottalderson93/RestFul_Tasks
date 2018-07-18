@@ -65,12 +65,12 @@ app.get('/tasks/:taskId', (req,res) => {
 });
 
 app.post('/tasks',(req,res) => {
-    console.log(req.body.title,req.body.description);
+    console.log("POST route: ",req.body.title,req.body.description);
     var task = new Task({title:req.body.title, description:req.body.description})
     task.save(function(saveError){
         if(saveError){
             console.log("could not save, ",saveError);
-            res.redirect('/');
+            res.json({"Success":"No"});
         }
         else{
             console.log("saved task to DB; ",task);
@@ -83,16 +83,16 @@ app.put('/tasks/:taskId',(req,res) => {
     Task.findOneAndUpdate({_id:req.params.taskId},req.body,function(err,task){
         if(err){
             console.log("could not find task, ",err);
-            res.redirect("/");
+            res.json({"Success" : "No"});
         }
         if(task == null){
             console.log("could not find a task with that ID");
-            res.redirect("/");
+            res.json({"Success" : "No"});
         }
         else{
             console.log("found this task: ",task);
             console.log("editing....");
-            res.redirect('/');
+            res.json(task);
         }
     });
 });

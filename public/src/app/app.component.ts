@@ -17,7 +17,9 @@ export class AppComponent implements OnInit{
   loggedIn: boolean;
   getTasks : boolean;
   pokemon = {};
-  details = {};
+  details = {_id:""};
+  newTask:any;
+  taskToEdit:any;
   constructor(private _httpService: HttpService){
 
   }
@@ -25,6 +27,7 @@ export class AppComponent implements OnInit{
     //console.log(this._httpService.getTasks());
     this.findPoke();
     this.getTasks = false;
+    this.newTask = { title:"",description:""};
   }
   findTask(id : String){
     this._httpService.getTaskById(id);
@@ -56,8 +59,34 @@ export class AppComponent implements OnInit{
     obs.subscribe(task =>{
       this.getTasks = true;
       this.details = task['data'];
+      this.taskToEdit = this.details;
     });
   }
+  onSubmit() {
+    console.log("onSubmit: ",this.newTask);
+    this._httpService.addTask(this.newTask)
+    .subscribe(res =>{
+      console.log("subscribe: ",res);
+    });
+    this.newTask = { title: "", description: "" };
+  }
+  editTask() {
+    let curTask = this.details;
+    console.log("editing: ", curTask);
+    this._httpService.updateTask(curTask,curTask._id)
+    .subscribe(res =>{
+      console.log("sub edit: ",res);
+    });
+
+  } 
+  delTask(event){
+    let obs = this._httpService.deleteTask(event.srcElement.value);
+    console.log("deleting: ",obs);
+    obs.subscribe(task =>{
+      console.log("deleting in component:",task);
+    });
+  }
+  
   // onButtonClick(): void { 
   //   console.log(`Click event is working`);
   // }

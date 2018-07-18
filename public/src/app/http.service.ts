@@ -27,5 +27,18 @@ export class HttpService {
   //tempObservable.subscribe(data => console.log("Got one pokemon: ", data));
   return tempObservable;
  }
-
+ addTask(newtask){
+  console.log("service, ",newtask);
+  return this._http.post('/tasks', newtask);
+ }
+ updateTask(editTask,taskId : String){
+   console.log("service edit, ", editTask);
+   let route = "/tasks/" + taskId;
+   return this._http.put(route,editTask);
+ }
+ deleteTask(taskId :String){
+   console.log("deleting in service:",taskId);
+   let route = "/tasks/" +taskId;
+   return this._http.delete(route);
+ }
 }
